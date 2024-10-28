@@ -1,7 +1,7 @@
 export const getDataResponse = async (url: string) => {
   try {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}${url}`, {
-      cache: 'no-store',
+      next: { revalidate: 60 },
     });
     const response = await res.json();
     return response;

@@ -1,4 +1,4 @@
-import Register from '@/components/Fragments/Register'
+import Register from '@/components/Fragments/Register';
 
 const RegisterPage = () => {
   return (
@@ -17,7 +17,7 @@ const RegisterPage = () => {
         <Register />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default RegisterPage
+export default RegisterPage;

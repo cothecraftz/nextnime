@@ -1,15 +1,16 @@
-import Pagination from '@/components/atom/Pagination'
-import CardManga from '@/components/CardManga'
-import LoadingCard from '@/components/Loading/LoadingCard'
-import { getNestedDataResponse } from '@/utils/api'
-import { Suspense } from 'react'
+import Pagination from '@/components/atom/Pagination';
+import CardManga from '@/components/CardManga';
+import LoadingCard from '@/components/Loading/LoadingCard';
+import { getNestedDataResponse } from '@/utils/api';
+import { Suspense } from 'react';
 
-const RecomendationsPage = async ({ params }: { params: { page: string } }) => {
-  const results: object[] = await getNestedDataResponse('/recommendations/manga', 'entry')
+const RecomendationsPage = async (props: { params: Promise<{ page: string }> }) => {
+  const params = await props.params;
+  const results: object[] = await getNestedDataResponse('/recommendations/manga', 'entry');
   const data: any = results.slice(
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 : 0,
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 + 25 : 25
-  )
+  );
 
   return (
     <section className="wrapper">
@@ -23,7 +24,7 @@ const RecomendationsPage = async ({ params }: { params: { page: string } }) => {
       </div>
       <Pagination page={params.page} lastPagination={7} />
     </section>
-  )
-}
+  );
+};
 
-export default RecomendationsPage
+export default RecomendationsPage;

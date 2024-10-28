@@ -1,6 +1,6 @@
-'use client'
-import { CircularProgressbar, buildStyles } from 'react-circular-progressbar'
-import 'react-circular-progressbar/dist/styles.css'
+'use client';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
 
 const Rating = ({ rating }: any) => {
   return (
@@ -14,7 +14,7 @@ const Rating = ({ rating }: any) => {
         pathColor: rating < 5 ? 'red' : rating < 7 ? 'orange' : 'green',
       })}
     />
-  )
-}
+  );
+};
 
-export default Rating
+export default Rating;

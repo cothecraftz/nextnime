@@ -1,11 +1,12 @@
-import Pagination from '@/components/atom/Pagination'
-import LoadingCard from '@/components/Loading/LoadingCard'
-import { getDataResponse } from '@/utils/api'
-import React, { Suspense } from 'react'
-const CardManga = React.lazy(() => import('@/components/CardManga'))
+import Pagination from '@/components/atom/Pagination';
+import LoadingCard from '@/components/Loading/LoadingCard';
+import { getDataResponse } from '@/utils/api';
+import React, { Suspense } from 'react';
+const CardManga = React.lazy(() => import('@/components/CardManga'));
 
-const PopulerPage = async ({ params }: { params: { page: string } }) => {
-  const data = await getDataResponse(`/top/manga?page=${params.page}`)
+const PopulerPage = async (props: { params: Promise<{ page: string }> }) => {
+  const params = await props.params;
+  const data = await getDataResponse(`/top/manga?page=${params.page}`);
 
   return (
     <section className="wrapper">
@@ -21,7 +22,7 @@ const PopulerPage = async ({ params }: { params: { page: string } }) => {
         <Pagination page={params.page} lastPagination={data?.pagination?.last_visible_page} />
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default PopulerPage
+export default PopulerPage;

@@ -1,30 +1,30 @@
-import Image from 'next/image'
-import Rating from '../atom/Rating'
-import VidioPlayer from './VidioPlayer'
-import Button from '../atom/Button'
-import Link from 'next/link'
-import { img } from '@/utils/img'
-import { getDataResponse } from '@/utils/api'
-import { Suspense } from 'react'
-import LoadingDetail from '../Loading/LoadingDetail'
-import Session from '@/utils/session'
-import ButtonCollection from './ButtonCollection'
-import { prisma } from '@/libs/prisma/prisma'
-import { BsFillBookmarkCheckFill } from 'react-icons/bs'
-import AnimeComment from './AnimeComment'
-import AnimeCommentList from './AnimeCommentList'
+import Image from 'next/image';
+import Rating from '../atom/Rating';
+import VidioPlayer from './VidioPlayer';
+import Button from '../atom/Button';
+import Link from 'next/link';
+import { img } from '@/utils/img';
+import { getDataResponse } from '@/utils/api';
+import { Suspense } from 'react';
+import LoadingDetail from '../Loading/LoadingDetail';
+import Session from '@/utils/session';
+import ButtonCollection from './ButtonCollection';
+import { prisma } from '@/libs/prisma/prisma';
+import { BsFillBookmarkCheckFill } from 'react-icons/bs';
+import AnimeComment from './AnimeComment';
+import AnimeCommentList from './AnimeCommentList';
 
 const DetailAnime = async ({ id }: { id: string }) => {
-  const data = await getDataResponse(`/anime/${id}/full`)
-  const result = await data?.data
-  const user: any = await Session()
+  const data = await getDataResponse(`/anime/${id}/full`);
+  const result = await data?.data;
+  const user: any = await Session();
 
   const collections = await prisma.animeCollection.findFirst({
     where: {
       anime_mal_id: id,
       user_email: user?.email,
     },
-  })
+  });
 
   const ImageDetail = () => {
     return (
@@ -55,16 +55,16 @@ const DetailAnime = async ({ id }: { id: string }) => {
           </>
         ) : null}
       </div>
-    )
-  }
+    );
+  };
 
   const RatingDetail = () => {
     return (
       <div className="w-14 h-14 my-3 rounded-full overflow-hidden bg-white">
         <Rating rating={result?.score} />
       </div>
-    )
-  }
+    );
+  };
 
   const Genre = () => {
     return (
@@ -75,8 +75,8 @@ const DetailAnime = async ({ id }: { id: string }) => {
           </p>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   const RankPopularity = () => {
     return (
@@ -88,8 +88,8 @@ const DetailAnime = async ({ id }: { id: string }) => {
           Popularity #{result?.popularity ? result?.popularity : '?'}
         </p>
       </div>
-    )
-  }
+    );
+  };
 
   const ListStudio = () => {
     return (
@@ -108,16 +108,16 @@ const DetailAnime = async ({ id }: { id: string }) => {
           '-'
         )}
       </p>
-    )
-  }
+    );
+  };
 
   const ListDetail = ({ title, data, opt = '' }: { title: string; data: any; opt?: string }) => {
     return (
       <p className="list-detail">
         <span className="font-bold">{title} :</span> {data ? `${data} ${opt}` : '-'}
       </p>
-    )
-  }
+    );
+  };
 
   const Streaming = () => {
     return (
@@ -134,8 +134,8 @@ const DetailAnime = async ({ id }: { id: string }) => {
           </Button>
         ))}
       </div>
-    )
-  }
+    );
+  };
 
   return (
     <div className="mb-20">
@@ -188,7 +188,7 @@ const DetailAnime = async ({ id }: { id: string }) => {
         <VidioPlayer YoutubeId={result?.trailer?.youtube_id} />
       </Suspense>
     </div>
-  )
-}
+  );
+};
 
-export default DetailAnime
+export default DetailAnime;

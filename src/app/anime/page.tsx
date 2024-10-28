@@ -1,5 +1,5 @@
-import PopulerAnime from '@/components/Fragments/PopulerAnime';
-import RecomendationAnime from '@/components/Fragments/RecomendationAnime';
+import PopulerAnime from "@/components/Fragments/PopulerAnime";
+import RecomendationAnime from "@/components/Fragments/RecomendationAnime";
 
 export default function AnimePage() {
   return (

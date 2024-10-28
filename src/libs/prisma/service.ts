@@ -1,30 +1,20 @@
-import { prisma } from './prisma';
-import bcrypt from 'bcrypt';
+import { UserLogin } from "@/types/auth";
+import { prisma } from "./prisma";
+import bcrypt from "bcrypt";
+import { User } from "@prisma/client";
 
-export const login = async (userLogin: { email: string; password: string }) => {
-  try {
-    const user = await prisma.user.findUnique({ where: { email: userLogin.email } });
-
-    const userData = {
-      email: user?.email,
-      username: user?.username,
-      password: user?.password,
-    };
-
-    if (user) {
-      return userData;
-    } else {
-      return null;
-    }
-  } catch (error) {
-    return null;
+export const login = async (email: string) => {
+  const user: User | null = await prisma.user.findUnique({ where: { email: email } });
+  if (!user || !user.password) {
+    throw new Error("User not found.");
   }
+  return user;
 };
 
 export const register = async (userData: { username: string; email: string; password: string }) => {
   const q = await prisma.user.findUnique({ where: { email: userData.email } });
   if (q) {
-    return { status: false, statusCode: 400, message: 'email sudah ada' };
+    return { status: false, statusCode: 400, message: "email sudah ada" };
   } else {
     userData.password = await bcrypt.hash(userData.password, 5);
     try {
@@ -35,9 +25,9 @@ export const register = async (userData: { username: string; email: string; pass
           password: userData.password,
         },
       });
-      return { status: true, statusCode: 200, message: 'success register', user };
+      return { status: true, statusCode: 200, message: "success register", user };
     } catch (error) {
-      return { status: false, statusCode: 400, message: 'gagal register' };
+      return { status: false, statusCode: 400, message: "gagal register" };
     }
   }
 };
@@ -56,7 +46,7 @@ export const loginWithGoogle = async (
     await prisma.user
       .update({ where: { email: userData.email }, data: userData })
       .then(() => {
-        callback({ status: true, message: 'login google berhasil', data: userData });
+        callback({ status: true, message: "login google berhasil", data: userData });
       })
       .catch((error) => {
         callback({ status: false, message: error });
@@ -65,7 +55,7 @@ export const loginWithGoogle = async (
     await prisma.user
       .create({ data: userData })
       .then(() => {
-        callback({ status: true, message: 'login google berhasil', data: userData });
+        callback({ status: true, message: "login google berhasil", data: userData });
       })
       .catch((error) => {
         callback({ status: false, message: error });

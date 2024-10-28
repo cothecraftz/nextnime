@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { img } from '@/utils/img'
-import Image from 'next/image'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
+import { img } from '@/utils/img';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 interface MangaCommentProps {
-  manga_mal_id: string
-  manga_title: string
-  username: string
-  user_email: string
-  user_image: string
+  manga_mal_id: string;
+  manga_title: string;
+  username: string;
+  user_email: string;
+  user_image: string;
 }
 
 const MangaComment: React.FC<MangaCommentProps> = ({
@@ -21,18 +21,18 @@ const MangaComment: React.FC<MangaCommentProps> = ({
   user_email,
   user_image,
 }) => {
-  const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
-  const [user, setUser] = useState(user_email || null)
-  const router = useRouter()
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState('');
+  const [user, setUser] = useState(user_email || null);
+  const router = useRouter();
 
   useEffect(() => {
-    setUser(user_email || null)
-  }, [user_email])
+    setUser(user_email || null);
+  }, [user_email]);
 
   const handleCommentSubmit = async (e: any) => {
-    e.preventDefault()
-    setLoading(true)
+    e.preventDefault();
+    setLoading(true);
     const data = {
       user_email,
       user_image,
@@ -40,23 +40,23 @@ const MangaComment: React.FC<MangaCommentProps> = ({
       username,
       manga_title,
       comment: message,
-    }
+    };
     try {
       const response = await fetch('/api/manga/comment', {
         method: 'POST',
         body: JSON.stringify(data),
-      })
+      });
       if (response.status) {
-        setLoading(false)
-        router.refresh()
+        setLoading(false);
+        router.refresh();
       }
-      setMessage('')
-      setLoading(false)
+      setMessage('');
+      setLoading(false);
     } catch (error) {
-      console.log(error)
-      setLoading(false)
+      console.log(error);
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="w-full flex gap-2 mb-4">
@@ -91,7 +91,7 @@ const MangaComment: React.FC<MangaCommentProps> = ({
         )}
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default MangaComment
+export default MangaComment;

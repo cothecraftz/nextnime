@@ -1,19 +1,19 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 
 interface DeleteMangaCommentProps {
-  id: string
+  id: string;
 }
 
 const DeleteMangaComment: React.FC<DeleteMangaCommentProps> = ({ id }) => {
-  const router = useRouter()
+  const router = useRouter();
   const handleDeleteComment = async (id: string) => {
     const response = await fetch(`/api/manga/comment/${id}`, {
       method: 'DELETE',
-    })
-    if (response.status) return router.refresh()
-  }
+    });
+    if (response.status) return router.refresh();
+  };
 
   return (
     <p
@@ -22,7 +22,7 @@ const DeleteMangaComment: React.FC<DeleteMangaCommentProps> = ({ id }) => {
     >
       Delete
     </p>
-  )
-}
+  );
+};
 
-export default DeleteMangaComment
+export default DeleteMangaComment;

@@ -1,20 +1,20 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import React, { RefObject, useEffect, useRef, useState } from 'react';
-import DropdownNavlist from './DropdownNavlist';
-import { TbWorldSearch } from 'react-icons/tb';
-import { ImCross } from 'react-icons/im';
-import SelectBox from './SelectBox';
-import { signIn, useSession } from 'next-auth/react';
-import ProfileNavbar from './ProfileNavbar';
+import Link from "next/link";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import React, { RefObject, useEffect, useRef, useState } from "react";
+import DropdownNavlist from "./DropdownNavlist";
+import { TbWorldSearch } from "react-icons/tb";
+import { ImCross } from "react-icons/im";
+import SelectBox from "./SelectBox";
+import { signIn, useSession } from "next-auth/react";
+import ProfileNavbar from "./ProfileNavbar";
 
 const Navbar = () => {
   const [isNavInput, setIsNavInput] = useState(false);
   const [isNavScrool, setIsNavScrool] = useState(false);
-  const [query, setQuery] = useState('');
-  const inputRef: RefObject<HTMLInputElement> = useRef(null);
+  const [query, setQuery] = useState("");
+  const inputRef: RefObject<HTMLInputElement | null> = useRef(null);
   const { push } = useRouter();
   const { data: session, status }: any = useSession();
 
@@ -22,18 +22,18 @@ const Navbar = () => {
   const pathname = usePathname();
   const params = new URLSearchParams(searchParams);
 
-  const typeEndPoint = params.get('type')?.toString();
-  const [endPoint, setEndPoint] = useState(typeEndPoint || 'anime');
+  const typeEndPoint = params.get("type")?.toString();
+  const [endPoint, setEndPoint] = useState(typeEndPoint || "anime");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!query || query.trim() === '') {
+    if (!query || query.trim() === "") {
       return;
     } else {
-      params.set('type', endPoint);
-      params.set('query', query);
+      params.set("type", endPoint);
+      params.set("query", query);
       push(`/search?${params.toString()}`);
-      setQuery('');
+      setQuery("");
       setIsNavInput(false);
       if (inputRef.current) inputRef.current.blur();
     }
@@ -50,16 +50,16 @@ const Navbar = () => {
         setIsNavScrool(false);
       }
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
   return (
     <header
       className={`${
-        isNavScrool ? 'shadow-md' : ''
+        isNavScrool ? "shadow-md" : ""
       } w-full fixed top-0 left-0 z-50 bg-white h-16 flex justify-center items-center`}
     >
       <nav className="border-gray-200 w-full">
@@ -75,7 +75,7 @@ const Navbar = () => {
           <div className="flex gap-4 items-center">
             <div
               className={`absolute z-50 left-0 bg-indigo-500 p-4 sm:p-0 w-full sm:w-auto sm:bg-transparent sm:static flex ${
-                isNavInput ? 'top-0' : '-top-40'
+                isNavInput ? "top-0" : "-top-40"
               } gap-2 items-center justify-center transition-all duration-200`}
             >
               <SelectBox endPoint={endPoint} setEndPoint={setEndPoint} />
@@ -123,7 +123,7 @@ const Navbar = () => {
               <DropdownNavlist />
             </div>
             <div className="flex gap-2">
-              {status !== 'authenticated' ? (
+              {status !== "authenticated" ? (
                 <button
                   onClick={() => signIn()}
                   className="bg-primary px-5 py-2 grid place-content-center rounded-md text-white"

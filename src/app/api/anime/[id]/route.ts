@@ -1,7 +1,8 @@
 import { prisma } from '@/libs/prisma/prisma'
 import { NextRequest, NextResponse } from 'next/server'
 
-export async function DELETE(request: NextRequest, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest, props: { params: Promise<{ id: string }> }) {
+  const params = await props.params;
   const dataCollection = await prisma.animeCollection.delete({
     where: {
       id: params.id,

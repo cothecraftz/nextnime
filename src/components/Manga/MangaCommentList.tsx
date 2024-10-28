@@ -1,15 +1,15 @@
-import { prisma } from '@/libs/prisma/prisma'
-import { img } from '@/utils/img'
-import Image from 'next/image'
-import DeleteMangaComment from './DeleteMangaComment'
+import { prisma } from '@/libs/prisma/prisma';
+import { img } from '@/utils/img';
+import Image from 'next/image';
+import DeleteMangaComment from './DeleteMangaComment';
 
 interface MangaCommentListProps {
-  id: string
-  email: string
+  id: string;
+  email: string;
 }
 
 const MangaCommentList: React.FC<MangaCommentListProps> = async ({ id, email }) => {
-  const comments = await prisma.mangaComment.findMany({ where: { manga_mal_id: id } })
+  const comments = await prisma.mangaComment.findMany({ where: { manga_mal_id: id } });
 
   return (
     <div className="py-2 flex flex-col gap-3">
@@ -39,7 +39,7 @@ const MangaCommentList: React.FC<MangaCommentListProps> = async ({ id, email }) 
         <p>Blom ada comment</p>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default MangaCommentList
+export default MangaCommentList;

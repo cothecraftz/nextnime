@@ -1,15 +1,16 @@
-import Pagination from '@/components/atom/Pagination'
-import LoadingCard from '@/components/Loading/LoadingCard'
-import { getNestedDataResponse } from '@/utils/api'
-import React, { Suspense } from 'react'
-const CardAnime = React.lazy(() => import('@/components/CardAnime'))
+import Pagination from '@/components/atom/Pagination';
+import LoadingCard from '@/components/Loading/LoadingCard';
+import { getNestedDataResponse } from '@/utils/api';
+import React, { Suspense } from 'react';
+const CardAnime = React.lazy(() => import('@/components/CardAnime'));
 
-const RecomendationsPage = async ({ params }: { params: { page: string } }) => {
-  const results: object[] = await getNestedDataResponse('/recommendations/anime', 'entry')
+const RecomendationsPage = async (props: { params: Promise<{ page: string }> }) => {
+  const params = await props.params;
+  const results: object[] = await getNestedDataResponse('/recommendations/anime', 'entry');
   const data: any = results.slice(
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 : 0,
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 + 25 : 25
-  )
+  );
 
   return (
     <section className="wrapper">
@@ -23,7 +24,7 @@ const RecomendationsPage = async ({ params }: { params: { page: string } }) => {
       </div>
       <Pagination page={params.page} lastPagination={7} />
     </section>
-  )
-}
+  );
+};
 
-export default RecomendationsPage
+export default RecomendationsPage;

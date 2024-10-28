@@ -1,14 +1,14 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { BsFillBookmarkCheckFill } from 'react-icons/bs'
-import { FaBookmark } from 'react-icons/fa'
+import { useState } from 'react';
+import { BsFillBookmarkCheckFill } from 'react-icons/bs';
+import { FaBookmark } from 'react-icons/fa';
 
 interface ButtonCollectionProps {
-  user_email: string
-  manga_mal_id: string
-  manga_title: string
-  manga_image: string
+  user_email: string;
+  manga_mal_id: string;
+  manga_title: string;
+  manga_image: string;
 }
 
 const ButtonCollection: React.FC<ButtonCollectionProps> = ({
@@ -17,19 +17,19 @@ const ButtonCollection: React.FC<ButtonCollectionProps> = ({
   manga_title,
   manga_image,
 }) => {
-  const [isCreated, setIsCreated] = useState(false)
+  const [isCreated, setIsCreated] = useState(false);
 
   const handleCollection = async () => {
-    const dataCollection = { user_email, manga_mal_id, manga_title, manga_image }
-    console.log(dataCollection)
+    const dataCollection = { user_email, manga_mal_id, manga_title, manga_image };
+    console.log(dataCollection);
     const collection = await fetch('/api/manga/collection', {
       method: 'POST',
       body: JSON.stringify(dataCollection),
-    })
+    });
     if (collection.status) {
-      setIsCreated(true)
+      setIsCreated(true);
     }
-  }
+  };
 
   return (
     <>
@@ -51,7 +51,7 @@ const ButtonCollection: React.FC<ButtonCollectionProps> = ({
         </button>
       )}
     </>
-  )
-}
+  );
+};
 
-export default ButtonCollection
+export default ButtonCollection;

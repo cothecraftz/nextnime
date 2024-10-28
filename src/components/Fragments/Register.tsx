@@ -1,20 +1,20 @@
-'use client';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+"use client";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const Register = () => {
-  const [message, setMessage] = useState('');
+  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
   const { push } = useRouter();
 
   const handleSubmitRegister = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-    setMessage('');
+    setMessage("");
 
-    const response = await fetch('/api/auth/register', {
-      method: 'POST',
+    const response = await fetch("/api/auth/register", {
+      method: "POST",
       body: JSON.stringify({
         username: e.target.username.value,
         email: e.target.email.value,
@@ -25,10 +25,10 @@ const Register = () => {
     if (response.status === 200) {
       e.target.reset();
       setLoading(false);
-      push('/login');
+      push("/login");
     } else {
       setLoading(false);
-      setMessage('*email sudah ada');
+      setMessage("*email sudah ada");
     }
   };
   return (
@@ -72,11 +72,6 @@ const Register = () => {
             <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
               Password
             </label>
-            {/* <div className="text-sm">
-                                <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
-                                    Forgot password?
-                                </a>
-                            </div> */}
           </div>
           <div className="mt-2">
             <input
@@ -95,7 +90,7 @@ const Register = () => {
             type="submit"
             className="flex w-full justify-center rounded-md bg-primary disabled:bg-slate-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
           >
-            {loading ? 'Loading...' : 'Sign Up'}
+            {loading ? "Loading..." : "Sign Up"}
           </button>
         </div>
       </form>

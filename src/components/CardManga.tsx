@@ -1,7 +1,7 @@
-import Image from 'next/image'
-import Rating from './atom/Rating'
-import Link from 'next/link'
-import { img } from '@/utils/img'
+import Image from 'next/image';
+import Rating from './atom/Rating';
+import Link from 'next/link';
+import { img } from '@/utils/img';
 
 const CardManga = ({ data }: { data: any }) => {
   return (
@@ -38,7 +38,7 @@ const CardManga = ({ data }: { data: any }) => {
       </div>
       <h1 className="line-clamp-2 text-sm text-black-gray mt-1">{data?.title}</h1>
     </div>
-  )
-}
+  );
+};
 
-export default CardManga
+export default CardManga;

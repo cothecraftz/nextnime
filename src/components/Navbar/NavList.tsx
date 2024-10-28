@@ -1,24 +1,24 @@
-import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 type NavlistProps = {
-  setIsNavList: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setIsNavList: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
 type DataList = {
-  name: string
-  path: string
-}
+  name: string;
+  path: string;
+};
 
-type DataListProps = DataList[]
+type DataListProps = DataList[];
 
 const dataListNav: DataListProps = [
   { name: 'anime', path: '/anime' },
   { name: 'manga', path: '/manga' },
-]
+];
 
 const NavList = ({ setIsNavList }: NavlistProps) => {
-  const pathname = usePathname()
+  const pathname = usePathname();
 
   return (
     <div className="order-2 md:order-1 flex flex-col gap-4 items-center md:flex-row md:gap-2 lg:gap-3 md:p-0">
@@ -35,7 +35,7 @@ const NavList = ({ setIsNavList }: NavlistProps) => {
         </Link>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default NavList
+export default NavList;

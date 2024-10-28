@@ -4,7 +4,8 @@ import { getDataResponse } from '@/utils/api'
 import React, { Suspense } from 'react'
 const CardAnime = React.lazy(() => import('@/components/CardAnime'))
 
-const PopulerPage = async ({ params }: { params: { page: string } }) => {
+const PopulerPage = async (props: { params: Promise<{ page: string }> }) => {
+  const params = await props.params;
   const data = await getDataResponse(`/top/anime?page=${params.page}`)
 
   return (
