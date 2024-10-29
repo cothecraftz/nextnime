@@ -1,7 +1,7 @@
 type ButtonProps = {
-  variant: 'primary' | 'secondary' | 'third';
+  variant: "primary" | "secondary" | "third";
   children: React.ReactNode;
-} & Omit<React.ComponentProps<'button'>, 'children'>;
+} & Omit<React.ComponentProps<"button">, "children">;
 
 const Button = ({ variant, children, ...rest }: ButtonProps) => {
   return (

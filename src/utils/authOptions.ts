@@ -2,7 +2,8 @@ import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
-import { login } from "@/libs/prisma/service";
+import { login, loginWithGoogle } from "@/libs/prisma/service";
+import { UserLoginWithGoogle } from "@/types/auth";
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -37,6 +38,26 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.AUTH_GOOGLE_SECRET || "",
     }),
   ],
+  callbacks: {
+    async jwt(params) {
+      if (params.account?.provider === "google") {
+        const data: UserLoginWithGoogle = {
+          username: params.user.name!,
+          email: params.user.email!,
+          image: params.user.image!,
+        };
+
+        await loginWithGoogle(data, (result: { status: boolean; data: UserLoginWithGoogle }) => {
+          if (result.status) {
+            params.token.username = result.data.username;
+            params.token.email = result.data.email;
+            params.token.image = result.data.image;
+          }
+        });
+      }
+      return params.token;
+    },
+  },
   pages: {
     signIn: "/login",
   },

@@ -1,4 +1,4 @@
-import { UserLogin } from "@/types/auth";
+import { UserLogin, UserLoginWithGoogle } from "@/types/auth";
 import { prisma } from "./prisma";
 import bcrypt from "bcrypt";
 import { User } from "@prisma/client";
@@ -12,39 +12,39 @@ export const login = async (email: string) => {
 };
 
 export const register = async (userData: { username: string; email: string; password: string }) => {
-  const q = await prisma.user.findUnique({ where: { email: userData.email } });
-  if (q) {
+  const query = await prisma.user.findUnique({ where: { email: userData.email } });
+
+  if (query) {
     return { status: false, statusCode: 400, message: "email sudah ada" };
-  } else {
+  }
+
+  try {
     userData.password = await bcrypt.hash(userData.password, 5);
-    try {
-      const user = await prisma.user.create({
-        data: {
-          username: userData.username,
-          email: userData.email,
-          password: userData.password,
-        },
-      });
-      return { status: true, statusCode: 200, message: "success register", user };
-    } catch (error) {
-      return { status: false, statusCode: 400, message: "gagal register" };
-    }
+
+    const user = await prisma.user.create({
+      data: {
+        username: userData.username,
+        email: userData.email,
+        password: userData.password,
+      },
+    });
+
+    return { status: true, statusCode: 200, message: "success register", user };
+  } catch (error) {
+    return { status: false, statusCode: 400, message: "gagal register" };
   }
 };
 
-export const loginWithGoogle = async (
-  userData: { username: string; email: string; image: string },
-  callback: any
-) => {
-  const q = await prisma.user.findUnique({
+export const loginWithGoogle = async (userData: UserLoginWithGoogle, callback: any) => {
+  const query = await prisma.user.findUnique({
     where: {
-      email: userData.email,
+      email: userData.email!,
     },
   });
 
-  if (q) {
+  if (query) {
     await prisma.user
-      .update({ where: { email: userData.email }, data: userData })
+      .update({ where: { email: userData.email! }, data: userData })
       .then(() => {
         callback({ status: true, message: "login google berhasil", data: userData });
       })

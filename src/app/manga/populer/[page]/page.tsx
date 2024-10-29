@@ -1,8 +1,8 @@
-import Pagination from '@/components/atom/Pagination';
-import LoadingCard from '@/components/Loading/LoadingCard';
-import { getDataResponse } from '@/utils/api';
-import React, { Suspense } from 'react';
-const CardManga = React.lazy(() => import('@/components/CardManga'));
+import Pagination from "@/components/ui/Pagination";
+import LoadingCard from "@/components/Loading/LoadingCard";
+import { getDataResponse } from "@/utils/api";
+import React, { Suspense } from "react";
+const CardManga = React.lazy(() => import("@/components/CardManga"));
 
 const PopulerPage = async (props: { params: Promise<{ page: string }> }) => {
   const params = await props.params;

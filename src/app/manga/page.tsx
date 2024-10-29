@@ -1,5 +1,5 @@
-import PopulerManga from "@/components/Fragments/PopulerManga";
-import RecomendationManga from "@/components/Fragments/RecomendationManga";
+import PopulerManga from "@/components/element/PopulerManga";
+import RecomendationManga from "@/components/element/RecomendationManga";
 
 export default function MangaPage() {
   return (

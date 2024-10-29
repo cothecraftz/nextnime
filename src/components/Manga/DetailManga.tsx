@@ -1,17 +1,17 @@
-import Image from 'next/image';
-import Rating from '../atom/Rating';
-import Button from '../atom/Button';
-import Link from 'next/link';
-import { img } from '@/utils/img';
-import { getDataResponse } from '@/utils/api';
-import { Suspense } from 'react';
-import LoadingDetail from '../Loading/LoadingDetail';
-import { BsFillBookmarkCheckFill } from 'react-icons/bs';
-import ButtonCollection from './ButtonCollection';
-import Session from '@/utils/session';
-import { prisma } from '@/libs/prisma/prisma';
-import MangaComment from './MangaComment';
-import MangaCommentList from './MangaCommentList';
+import Image from "next/image";
+import Rating from "../ui/Rating";
+import Button from "../ui/Button";
+import Link from "next/link";
+import { img } from "@/utils/img";
+import { getDataResponse } from "@/utils/api";
+import { Suspense } from "react";
+import LoadingDetail from "../Loading/LoadingDetail";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import ButtonCollection from "./ButtonCollection";
+import Session from "@/utils/session";
+import { prisma } from "@/libs/prisma/prisma";
+import MangaComment from "./MangaComment";
+import MangaCommentList from "./MangaCommentList";
 
 const DetailManga = async ({ id }: { id: string }) => {
   const data = await getDataResponse(`/manga/${id}/full`);
@@ -40,7 +40,7 @@ const DetailManga = async ({ id }: { id: string }) => {
           <>
             {collections ? (
               <button className="w-fit bg-primary cursor-not-allowed px-3 py-1 absolute top-2 right-2 flex items-center gap-1 rounded-md">
-                <BsFillBookmarkCheckFill className="text-xs text-white" />{' '}
+                <BsFillBookmarkCheckFill className="text-xs text-white" />{" "}
                 <span className="text-xs block text-white capitalize">collected</span>
               </button>
             ) : (
@@ -81,10 +81,10 @@ const DetailManga = async ({ id }: { id: string }) => {
     return (
       <div className="flex items-center gap-2 mb-1">
         <p className="text-xs bg-red-secondary px-2 py-1 rounded-md text-white w-fit h-fit">
-          Rank #{result?.rank ? result?.rank : '?'}
+          Rank #{result?.rank ? result?.rank : "?"}
         </p>
         <p className="text-xs bg-red-secondary px-2 py-1 rounded-md text-white w-fit h-fit">
-          Popularity #{result?.popularity ? result?.popularity : '?'}
+          Popularity #{result?.popularity ? result?.popularity : "?"}
         </p>
       </div>
     );
@@ -99,21 +99,21 @@ const DetailManga = async ({ id }: { id: string }) => {
             {result?.authors?.map((item: any, i: number) => (
               <span key={i}>
                 {item.name}
-                {result?.authors?.length > 1 && ', '}
+                {result?.authors?.length > 1 && ", "}
               </span>
             ))}
           </>
         ) : (
-          '-'
+          "-"
         )}
       </p>
     );
   };
 
-  const ListDetail = ({ title, data, opt = '' }: { title: string; data: any; opt?: string }) => {
+  const ListDetail = ({ title, data, opt = "" }: { title: string; data: any; opt?: string }) => {
     return (
       <p className="list-detail">
-        <span className="font-bold">{title} :</span> {data ? `${data} ${opt}` : '?'}
+        <span className="font-bold">{title} :</span> {data ? `${data} ${opt}` : "?"}
       </p>
     );
   };
@@ -122,7 +122,7 @@ const DetailManga = async ({ id }: { id: string }) => {
     return (
       <div className="text-sm flex flex-wrap gap-1 mt-2">
         {result?.serializations.map((item: any, index: number) => (
-          <Button variant={`${index % 2 === 0 ? 'primary' : 'third'}`} key={index}>
+          <Button variant={`${index % 2 === 0 ? "primary" : "third"}`} key={index}>
             <Link
               target="_blank"
               href={item.url}
@@ -179,7 +179,7 @@ const DetailManga = async ({ id }: { id: string }) => {
               manga_title={result?.title}
               username={user?.name}
               user_email={user?.email}
-              user_image={user?.image ? user?.image : ''}
+              user_image={user?.image ? user?.image : ""}
             />
             <MangaCommentList email={user?.email} id={id} />
           </div>

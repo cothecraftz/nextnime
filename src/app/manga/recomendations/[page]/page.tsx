@@ -1,12 +1,12 @@
-import Pagination from '@/components/atom/Pagination';
-import CardManga from '@/components/CardManga';
-import LoadingCard from '@/components/Loading/LoadingCard';
-import { getNestedDataResponse } from '@/utils/api';
-import { Suspense } from 'react';
+import Pagination from "@/components/ui/Pagination";
+import CardManga from "@/components/CardManga";
+import LoadingCard from "@/components/Loading/LoadingCard";
+import { getNestedDataResponse } from "@/utils/api";
+import { Suspense } from "react";
 
 const RecomendationsPage = async (props: { params: Promise<{ page: string }> }) => {
   const params = await props.params;
-  const results: object[] = await getNestedDataResponse('/recommendations/manga', 'entry');
+  const results: object[] = await getNestedDataResponse("/recommendations/manga", "entry");
   const data: any = results.slice(
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 : 0,
     parseInt(params.page) > 1 ? parseInt(params.page) * 25 + 25 : 25

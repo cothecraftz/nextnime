@@ -8,3 +8,9 @@ export type UserLoginWithUsername = {
   username: string;
   password?: string | null;
 };
+
+export type UserLoginWithGoogle = {
+  email: string;
+  username: string;
+  image: string;
+};

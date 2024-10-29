@@ -1,18 +1,18 @@
-import Image from 'next/image';
-import Rating from '../atom/Rating';
-import VidioPlayer from './VidioPlayer';
-import Button from '../atom/Button';
-import Link from 'next/link';
-import { img } from '@/utils/img';
-import { getDataResponse } from '@/utils/api';
-import { Suspense } from 'react';
-import LoadingDetail from '../Loading/LoadingDetail';
-import Session from '@/utils/session';
-import ButtonCollection from './ButtonCollection';
-import { prisma } from '@/libs/prisma/prisma';
-import { BsFillBookmarkCheckFill } from 'react-icons/bs';
-import AnimeComment from './AnimeComment';
-import AnimeCommentList from './AnimeCommentList';
+import Image from "next/image";
+import Rating from "../ui/Rating";
+import VidioPlayer from "./VidioPlayer";
+import Button from "../ui/Button";
+import Link from "next/link";
+import { img } from "@/utils/img";
+import { getDataResponse } from "@/utils/api";
+import { Suspense } from "react";
+import LoadingDetail from "../Loading/LoadingDetail";
+import Session from "@/utils/session";
+import ButtonCollection from "./ButtonCollection";
+import { prisma } from "@/libs/prisma/prisma";
+import { BsFillBookmarkCheckFill } from "react-icons/bs";
+import AnimeComment from "./AnimeComment";
+import AnimeCommentList from "./AnimeCommentList";
 
 const DetailAnime = async ({ id }: { id: string }) => {
   const data = await getDataResponse(`/anime/${id}/full`);
@@ -41,7 +41,7 @@ const DetailAnime = async ({ id }: { id: string }) => {
           <>
             {collections ? (
               <button className="w-fit bg-primary cursor-not-allowed px-3 py-1 absolute top-2 right-2 flex items-center gap-1 rounded-md">
-                <BsFillBookmarkCheckFill className="text-xs text-white" />{' '}
+                <BsFillBookmarkCheckFill className="text-xs text-white" />{" "}
                 <span className="text-xs block text-white capitalize">collected</span>
               </button>
             ) : (
@@ -82,10 +82,10 @@ const DetailAnime = async ({ id }: { id: string }) => {
     return (
       <div className="flex items-center gap-2 mb-1">
         <p className="text-xs bg-red-secondary px-2 py-1 rounded-md text-white w-fit h-fit">
-          Rank #{result?.rank ? result?.rank : '?'}
+          Rank #{result?.rank ? result?.rank : "?"}
         </p>
         <p className="text-xs bg-red-secondary px-2 py-1 rounded-md text-white w-fit h-fit">
-          Popularity #{result?.popularity ? result?.popularity : '?'}
+          Popularity #{result?.popularity ? result?.popularity : "?"}
         </p>
       </div>
     );
@@ -100,21 +100,21 @@ const DetailAnime = async ({ id }: { id: string }) => {
             {result?.studios?.map((item: any, i: number) => (
               <span key={i}>
                 {item.name}
-                {result?.studios?.length > 1 && ', '}
+                {result?.studios?.length > 1 && ", "}
               </span>
             ))}
           </>
         ) : (
-          '-'
+          "-"
         )}
       </p>
     );
   };
 
-  const ListDetail = ({ title, data, opt = '' }: { title: string; data: any; opt?: string }) => {
+  const ListDetail = ({ title, data, opt = "" }: { title: string; data: any; opt?: string }) => {
     return (
       <p className="list-detail">
-        <span className="font-bold">{title} :</span> {data ? `${data} ${opt}` : '-'}
+        <span className="font-bold">{title} :</span> {data ? `${data} ${opt}` : "-"}
       </p>
     );
   };
@@ -123,7 +123,7 @@ const DetailAnime = async ({ id }: { id: string }) => {
     return (
       <div className="text-sm flex flex-wrap gap-1 mt-2">
         {result?.streaming.map((item: any, index: number) => (
-          <Button variant={`${index % 2 === 0 ? 'primary' : 'third'}`} key={index}>
+          <Button variant={`${index % 2 === 0 ? "primary" : "third"}`} key={index}>
             <Link
               target="_blank"
               href={item.url}
@@ -180,7 +180,7 @@ const DetailAnime = async ({ id }: { id: string }) => {
               anime_title={result?.title}
               username={user?.name}
               user_email={user?.email}
-              user_image={user?.image ? user?.image : ''}
+              user_image={user?.image ? user?.image : ""}
             />
             <AnimeCommentList email={user?.email} id={id} />
           </div>

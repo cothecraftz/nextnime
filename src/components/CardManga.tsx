@@ -1,7 +1,7 @@
-import Image from 'next/image';
-import Rating from './atom/Rating';
-import Link from 'next/link';
-import { img } from '@/utils/img';
+import Image from "next/image";
+import Rating from "./ui/Rating";
+import Link from "next/link";
+import { img } from "@/utils/img";
 
 const CardManga = ({ data }: { data: any }) => {
   return (

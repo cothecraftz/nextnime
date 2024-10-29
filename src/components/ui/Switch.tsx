@@ -1,5 +1,5 @@
-'use client';
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 const Switch = ({ dataSwitch, onTabChange }: { dataSwitch: string[]; onTabChange: Function }) => {
   const [swap, setSwap] = useState(0);
@@ -13,10 +13,10 @@ const Switch = ({ dataSwitch, onTabChange }: { dataSwitch: string[]; onTabChange
       {dataSwitch.map((item, index) => (
         <div
           key={index}
-          className={`switch ${swap === index ? 'bg-primary' : ''} transition-all duration-400`}
+          className={`switch ${swap === index ? "bg-primary" : ""} transition-all duration-400`}
           onClick={() => handleSwap(item, index)}
         >
-          <span className={`text-sm ${swap === index ? 'text-white' : 'text-black-gray'}`}>{item}</span>
+          <span className={`text-sm ${swap === index ? "text-white" : "text-black-gray"}`}>{item}</span>
         </div>
       ))}
     </div>
