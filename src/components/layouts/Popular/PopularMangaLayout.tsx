@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import Link from "next/link";
 import Switch from "@/components/ui/Switch";
+import Button from "@/components/ui/Button";
 
 type IProps = {
   children: ReactNode;
@@ -20,6 +21,9 @@ const PopularMangaLayout = ({ children, onTabChange }: IProps) => {
         <Switch dataSwitch={["Manga", "Novel"]} onTabChange={onTabChange} />
       </div>
       <div className="grid-card">{children}</div>
+      <Link href="/manga/populer/1" className="w-full my-6 flex justify-center items-center">
+        <Button variant="primary">Lihat Selengkapnya</Button>
+      </Link>
     </div>
   );
 };

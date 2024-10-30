@@ -1,5 +1,5 @@
 import { Children, ReactNode } from "react";
-import LoadingSpinner from "./Loading/LoadingSpinner";
+import LoadingCardWrapper from "@/components/Loading/LoadingCardWrapper";
 
 type IProps<T> = {
   render: (item: T, index: number) => ReactNode;
@@ -8,7 +8,7 @@ type IProps<T> = {
 };
 
 const EachUtils = <T,>({ render, of, loading }: IProps<T>) => {
-  if (loading) return <LoadingSpinner />;
+  if (loading) return <LoadingCardWrapper />;
   return Children.toArray(of.map((item, index) => render(item, index)));
 };
 

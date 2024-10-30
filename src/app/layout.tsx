@@ -1,14 +1,15 @@
-import type { Metadata } from 'next';
-import './globals.css';
-import AuthProvider from '@/components/AuthProvider';
-import Header from '@/components/Navbar/Header';
-import ProgresBarTop from '@/components/ProgresBarTop';
-import { gabarito } from '@/libs/fonts';
-import { Suspense } from 'react';
+import type { Metadata } from "next";
+import "./globals.css";
+import AuthProvider from "@/components/AuthProvider";
+import Header from "@/components/layouts/Navbar/Header";
+import ProgresBarTop from "@/components/ProgresBarTop";
+import { gabarito } from "@/libs/fonts";
+import { Suspense } from "react";
+import ReactQueryProvider from "@/components/ReactQueryProvider";
 
 export const metadata: Metadata = {
-  title: 'NextNime',
-  description: 'Website Anime Indonesia',
+  title: "NextNime",
+  description: "Website Anime Indonesia",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -16,10 +17,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`${gabarito.className} antialiased`}>
         <Suspense fallback={<p>Loading...</p>}>
-          <AuthProvider>
-            <Header />
-            <ProgresBarTop>{children}</ProgresBarTop>
-          </AuthProvider>
+          <ReactQueryProvider>
+            <AuthProvider>
+              <Header />
+              <ProgresBarTop>{children}</ProgresBarTop>
+            </AuthProvider>
+          </ReactQueryProvider>
         </Suspense>
       </body>
     </html>
