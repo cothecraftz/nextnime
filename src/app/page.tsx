@@ -15,7 +15,7 @@ export default function Home() {
       <div className="flex gap-2 mt-4 ">
         <Button variant="primary">
           <Link href="/anime" className="w-full h-full flex justify-center items-center">
-            anime
+            animek
           </Link>
         </Button>
         <Button variant="secondary">
